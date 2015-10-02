@@ -81,6 +81,13 @@ SetProperty::SetProperty(MapDocument *mapDocument,
         setText(QCoreApplication::translate("Undo Commands", "Add Property"));
 }
 
+SetProperty::SetProperty(MapDocument *mapDocument, const QList<Object *> &objects, const QString &name, const QString &value, const QVariant::Type type, QUndoCommand *parent)
+{
+    SetProperty(mapDocument,objects,name,value,parent);
+
+
+}
+
 void SetProperty::undo()
 {
     for (int i = 0; i < mObjects.size(); ++i) {

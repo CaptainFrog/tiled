@@ -89,7 +89,11 @@ public:
      * Returns the value of the object's \a name property.
      */
     QString property(const QString &name) const
-    { return mProperties.value(name); }
+    { return mProperties.value(name).toString(); }
+
+    QVariant propertyType(const QString &name) const {
+        return mProperties.value(name).type();
+    }
 
     /**
      * Returns whether this object has a property with the given \a name.
@@ -100,8 +104,12 @@ public:
     /**
      * Sets the value of the object's \a name property to \a value.
      */
-    void setProperty(const QString &name, const QString &value)
-    { mProperties.insert(name, value); }
+    void setProperty(const QString &name, const QString &value, QVariant::Type type = QVariant::String)
+    {
+        QVariant v = QVariant(type);
+        v.setValue(value);
+        mProperties.insert(name, v);
+    }
 
     /**
      * Removes the property with the given \a name.

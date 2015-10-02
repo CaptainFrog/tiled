@@ -23,6 +23,9 @@ AddPropertyDialog::AddPropertyDialog(QWidget *parent) :
 
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 
+    //Select String as Default
+    ui->typeBox->setCurrentText(QLatin1String("String"));
+
 }
 
 AddPropertyDialog::~AddPropertyDialog()

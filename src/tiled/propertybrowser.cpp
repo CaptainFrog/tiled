@@ -412,6 +412,7 @@ static QStringList objectTypeNames()
 
 void PropertyBrowser::addMapObjectProperties()
 {
+    // DEFAULT MAP OBJECT PROPERTIES
     QtProperty *groupProperty = mGroupManager->addProperty(tr("Object"));
 
     createProperty(IdProperty, QVariant::Int, tr("ID"), groupProperty)->setEnabled(false);
@@ -1050,7 +1051,7 @@ void PropertyBrowser::updateCustomProperties()
         if (obj == mObject)
             continue;
 
-        QMapIterator<QString,QString> it(obj->properties());
+        QMapIterator<QString,QVariant> it(obj->properties());
 
         while (it.hasNext()) {
             it.next();
@@ -1059,12 +1060,12 @@ void PropertyBrowser::updateCustomProperties()
         }
     }
 
-    QMapIterator<QString,QString> it(mCombinedProperties);
+    QMapIterator<QString,QVariant> it(mCombinedProperties);
 
     while (it.hasNext()) {
         it.next();
         QtVariantProperty *property = createProperty(CustomProperty,
-                                                     QVariant::String,
+                                                     it.value().type(),
                                                      it.key(),
                                                      mCustomPropertiesGroup);
         property->setValue(it.value());
