@@ -34,6 +34,7 @@
 #include <QEvent>
 #include <QInputDialog>
 #include <QKeyEvent>
+#include <QMessageBox>
 #include <QShortcut>
 #include <QToolBar>
 #include <QUndoStack>
@@ -192,22 +193,24 @@ void PropertiesDock::tilesetFileNameChanged(Tileset *tileset)
 
 void PropertiesDock::addProperty()
 {
-    /*QInputDialog *dialog = new QInputDialog(mPropertyBrowser);
-    dialog->setInputMode(QInputDialog::TextInput);
-    dialog->setLabelText(tr("Name:"));
-    dialog->setWindowTitle(tr("Add Property"));
-    dialog->open(this, SLOT(addProperty(QString)));*/
 
 
     // FROG BEGIN //
     AddPropertyDialog *dialog = new AddPropertyDialog(mPropertyBrowser);
-    dialog->open();
+    int result = dialog->exec();
+
+    if(result == AddPropertyDialog::Accepted){
+        // TODO addProperty
+        addProperty(dialog->getPropertyName(),dialog->getPropertyType());
+    }
+    delete dialog;
     // FROG END //
 
 }
 
-void PropertiesDock::addProperty(const QString &name)
+void PropertiesDock::addProperty(const QString &name, QVariant::Type type)
 {
+
     if (name.isEmpty())
         return;
     Object *object = mMapDocument->currentObject();

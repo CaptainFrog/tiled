@@ -15,6 +15,16 @@ public:
     explicit AddPropertyDialog(QWidget *parent = 0);
     ~AddPropertyDialog();
 
+
+    QString getPropertyName();
+    QVariant::Type getPropertyType();
+
+
+
+
+private slots:
+    void on_name_textChanged(const QString &arg1);
+
 private:
     Ui::AddPropertyDialog *ui;
 };
