@@ -20,6 +20,7 @@
 
 #include "propertiesdock.h"
 
+#include "addpropertydialog.h"
 #include "changeproperties.h"
 #include "documentmanager.h"
 #include "mapdocument.h"
@@ -191,11 +192,18 @@ void PropertiesDock::tilesetFileNameChanged(Tileset *tileset)
 
 void PropertiesDock::addProperty()
 {
-    QInputDialog *dialog = new QInputDialog(mPropertyBrowser);
+    /*QInputDialog *dialog = new QInputDialog(mPropertyBrowser);
     dialog->setInputMode(QInputDialog::TextInput);
     dialog->setLabelText(tr("Name:"));
     dialog->setWindowTitle(tr("Add Property"));
-    dialog->open(this, SLOT(addProperty(QString)));
+    dialog->open(this, SLOT(addProperty(QString)));*/
+
+
+    // FROG BEGIN //
+    AddPropertyDialog *dialog = new AddPropertyDialog(mPropertyBrowser);
+    dialog->open();
+    // FROG END //
+
 }
 
 void PropertiesDock::addProperty(const QString &name)
