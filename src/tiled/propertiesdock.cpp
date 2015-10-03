@@ -34,7 +34,6 @@
 #include <QEvent>
 #include <QInputDialog>
 #include <QKeyEvent>
-#include <QMessageBox>
 #include <QShortcut>
 #include <QToolBar>
 #include <QUndoStack>
@@ -193,19 +192,12 @@ void PropertiesDock::tilesetFileNameChanged(Tileset *tileset)
 
 void PropertiesDock::addProperty()
 {
-
-
-    // FROG BEGIN //
     AddPropertyDialog *dialog = new AddPropertyDialog(mPropertyBrowser);
     int result = dialog->exec();
-
     if(result == AddPropertyDialog::Accepted){
-        // TODO addProperty
         addProperty(dialog->getPropertyName(),dialog->getPropertyType());
     }
     delete dialog;
-    // FROG END //
-
 }
 
 void PropertiesDock::addProperty(const QString &name, QVariant::Type type)
@@ -219,7 +211,7 @@ void PropertiesDock::addProperty(const QString &name, QVariant::Type type)
 
     if (!object->hasProperty(name)) {
         QUndoStack *undoStack = mMapDocument->undoStack();
-        undoStack->push(new SetProperty(mMapDocument, mMapDocument->currentObjects(), name, QString()));
+        undoStack->push(new SetProperty(mMapDocument, mMapDocument->currentObjects(), name, QString(), type));
     }
 
     mPropertyBrowser->editCustomProperty(name);

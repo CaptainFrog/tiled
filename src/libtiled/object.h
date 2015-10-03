@@ -31,6 +31,8 @@
 
 #include "properties.h"
 
+#include <QDebug> // FROG REMOVE
+
 namespace Tiled {
 
 /**
@@ -91,7 +93,7 @@ public:
     QString property(const QString &name) const
     { return mProperties.value(name).toString(); }
 
-    QVariant propertyType(const QString &name) const {
+    QVariant::Type propertyType(const QString &name) const {
         return mProperties.value(name).type();
     }
 
@@ -106,8 +108,12 @@ public:
      */
     void setProperty(const QString &name, const QString &value, QVariant::Type type = QVariant::String)
     {
-        QVariant v = QVariant(type);
+        QVariant v;
         v.setValue(value);
+        v.convert(type);
+        qDebug() << v.toString();                   // FROG REMOVE
+        qDebug() << QLatin1String(v.typeName());    // FROG REMOVE
+        qDebug() << QLatin1String(QVariant::typeToName(type));            // FROG REMOVE
         mProperties.insert(name, v);
     }
 

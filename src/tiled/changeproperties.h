@@ -68,33 +68,13 @@ public:
      * @param objects      the objects of which the property should be changed
      * @param name         the name of the property to be changed
      * @param value        the new value of the property
-     */
-    SetProperty(MapDocument *mapDocument,
-                const QList<Object*> &objects,
-                const QString &name,
-                const QString &value,
-                QUndoCommand *parent = nullptr);
-
-
-
-    /**
-     * Constructs a new 'Set Property' command.
-     *
-     * @param mapDocument  the map document of the object's map
-     * @param objects      the objects of which the property should be changed
-     * @param name         the name of the property to be changed
-     * @param value        the new value of the property
      * @param type         the (new) type ot the property to be changed
-     * @param parent
      */
     SetProperty(MapDocument *mapDocument,
                 const QList<Object*> &objects,
                 const QString &name,
-                const QString &value,
-                const QVariant::Type type,
+                const QString &value, const QVariant::Type type,
                 QUndoCommand *parent = nullptr);
-
-
 
     void undo() override;
     void redo() override;
@@ -109,6 +89,7 @@ private:
     QList<Object*> mObjects;
     QString mName;
     QString mValue;
+    QVariant::Type mType;       // The type of the property
 };
 
 class RemoveProperty : public QUndoCommand

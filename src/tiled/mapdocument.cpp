@@ -954,6 +954,10 @@ void MapDocument::setProperty(Object *object,
                               QVariant::Type type)
 {
     const bool hadProperty = object->hasProperty(name);
+    qDebug() << QLatin1String("----- MAP DOC ---");
+    qDebug() << QLatin1String(QVariant::typeToName(type));    // FROG REMOVE
+    qDebug() << QLatin1String("----- MAP DOC ---");
+
     object->setProperty(name, value, type);
 
     if (hadProperty)
