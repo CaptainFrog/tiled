@@ -211,8 +211,14 @@ void PropertiesDock::addProperty(const QString &name, QVariant::Type type)
 
     if (!object->hasProperty(name)) {
         QUndoStack *undoStack = mMapDocument->undoStack();
+
+
+
         undoStack->push(new SetProperty(mMapDocument, mMapDocument->currentObjects(), name, QString(), type));
     }
+
+    // FROG TODO Deselect then reselect item to regenerate browser elements
+
 
     mPropertyBrowser->editCustomProperty(name);
 }
