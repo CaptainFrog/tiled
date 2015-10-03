@@ -255,7 +255,7 @@ void PropertyBrowser::propertyAdded(Object *object, const QString &name)
         QtProperty *precedingProperty = (index > 0) ? properties.at(index - 1) : nullptr;
 
         mUpdating = true;
-        QtVariantProperty *property = mVariantManager->addProperty(QVariant::String, name);
+        QtVariantProperty *property = mVariantManager->addProperty(mObject->propertyType(name), name);
         property->setValue(mObject->property(name));
         mCustomPropertiesGroup->insertSubProperty(property, precedingProperty);
         mPropertyToId.insert(property, CustomProperty);

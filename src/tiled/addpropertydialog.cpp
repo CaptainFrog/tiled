@@ -8,18 +8,20 @@ AddPropertyDialog::AddPropertyDialog(QWidget *parent) :
     ui->setupUi(this);
 
     // Add possible types from QVariant
-    // TODO rename double to float
     ui->typeBox->addItem(QLatin1String(QVariant::typeToName(QVariant::Bool)));
 
     ui->typeBox->addItem(QLatin1String(QVariant::typeToName(QVariant::Int)));
-    ui->typeBox->addItem(QLatin1String("Float"));
+
+    ui->typeBox->addItem(QLatin1String("float")); /* Double */
 
     // Rename QString, QSize and QPoint to something else
     ui->typeBox->addItem(QLatin1String("String"));    /* QString */
+
+    // Complex types
     ui->typeBox->addItem(QLatin1String("Size"));      /* QSize */
-    ui->typeBox->addItem(QLatin1String("SizeF"));     /* QSizeF */
+    ui->typeBox->addItem(QLatin1String("Size Float"));     /* QSizeF */
     ui->typeBox->addItem(QLatin1String("Point"));     /* QPoint */
-    ui->typeBox->addItem(QLatin1String("PointF"));    /* QPointF */
+    ui->typeBox->addItem(QLatin1String("Point Float"));    /* QPointF */
 
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 
@@ -41,12 +43,16 @@ QString AddPropertyDialog::getPropertyName()
 QVariant::Type AddPropertyDialog::getPropertyType()
 {
     QString typeText = ui->typeBox->currentText();
-    if(typeText == QLatin1String("Float")){ return QVariant::Double;}
+
+    // Returned the correct type according to the name
+    if(typeText == QLatin1String("float")){ return QVariant::Double;}
     if(typeText == QLatin1String("String")){ return QVariant::String;}
+
     if(typeText == QLatin1String("Size")){ return QVariant::Size;}
-    if(typeText == QLatin1String("SizeF")){ return QVariant::SizeF;}
+    if(typeText == QLatin1String("Size Float")){ return QVariant::SizeF;}
     if(typeText == QLatin1String("Point")){ return QVariant::Point;}
-    if(typeText == QLatin1String("PointF")){ return QVariant::PointF;}
+    if(typeText == QLatin1String("Point Float")){ return QVariant::PointF;}
+
     return QVariant::nameToType(typeText.toLatin1().constData());
 }
 
