@@ -105,16 +105,24 @@ public:
 
     /**
      * Sets the value of the object's \a name property to \a value.
+     * This override (<< FROG BETTER WORD HERE )is used for compatibility with plugins
      */
     void setProperty(const QString &name, const QString &value, QVariant::Type type = QVariant::String)
     {
         QVariant v;
         v.setValue(value);
         v.convert(type);
-        qDebug() << v.toString();                   // FROG REMOVE
-        qDebug() << QLatin1String(v.typeName());    // FROG REMOVE
-        qDebug() << QLatin1String(QVariant::typeToName(type));            // FROG REMOVE
-        mProperties.insert(name, v);
+        setProperty(name, v);
+    }
+
+    /**
+     * Sets the value of the object's \a name property to \a value.
+     */
+    void setProperty(const QString &name, QVariant variant)
+    {
+        qDebug() << variant.toString();                   // FROG REMOVE
+        qDebug() << QLatin1String(variant.typeName());    // FROG REMOVE
+        mProperties.insert(name, variant);
     }
 
     /**
