@@ -213,13 +213,12 @@ void PropertiesDock::addProperty(const QString &name, QVariant::Type type)
         QUndoStack *undoStack = mMapDocument->undoStack();
 
         // FROG TODO Find default value according to type (allow for complex types QSize, QDictionnary)
+        QVariant value;
+        value.setValue(QString());
+        value.convert(type);
 
-        undoStack->push(new SetProperty(mMapDocument, mMapDocument->currentObjects(), name, QString(), type));
+        undoStack->push(new SetProperty(mMapDocument, mMapDocument->currentObjects(), name, value));
     }
-
-    // FROG TODO Deselect then reselect item to regenerate browser elements
-
-
     mPropertyBrowser->editCustomProperty(name);
 }
 

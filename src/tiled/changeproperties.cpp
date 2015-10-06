@@ -60,8 +60,7 @@ void ChangeProperties::swapProperties()
 SetProperty::SetProperty(MapDocument *mapDocument,
                          const QList<Object*> &objects,
                          const QString &name,
-                         const QString &value,
-                         const QVariant::Type type,
+                         QVariant var,
                          QUndoCommand *parent)
     : QUndoCommand(parent)
     , mMapDocument(mapDocument)
@@ -70,8 +69,7 @@ SetProperty::SetProperty(MapDocument *mapDocument,
 {
 
 
-    mValue.setValue(value);
-    mValue.convert(type);
+    mValue = var;
 
     foreach (Object *obj, mObjects) {
         ObjectProperty prop;
@@ -152,6 +150,12 @@ RenameProperty::RenameProperty(MapDocument *mapDocument,
 
         const QString value = object->property(oldName);
         QVariant::Type type = object->propertyType(oldName);
-        new SetProperty(mapDocument, objects, newName, value, type, this);
+
+        // TODO GET REAL QVARIANT VALUE
+        QVariant v;
+        v.setValue(value);
+        v.convert(type);
+
+        new SetProperty(mapDocument, objects, newName, v, this);
     }
 }

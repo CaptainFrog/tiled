@@ -71,10 +71,10 @@ public:
      * @param type         the (new) type ot the property to be changed
      */
     SetProperty(MapDocument *mapDocument,
-                const QList<Object*> &objects,
-                const QString &name,
-                const QString &value, const QVariant::Type type,
-                QUndoCommand *parent = nullptr);
+                 const QList<Object*> &objects,
+                 const QString &name,
+                 QVariant var,
+                 QUndoCommand *parent = nullptr);
 
     void undo() override;
     void redo() override;
