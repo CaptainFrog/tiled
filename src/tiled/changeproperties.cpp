@@ -67,9 +67,12 @@ SetProperty::SetProperty(MapDocument *mapDocument,
     , mMapDocument(mapDocument)
     , mObjects(objects)
     , mName(name)
-    , mValue(value)
-    , mType(type)
 {
+
+
+    mValue.setValue(value);
+    mValue.convert(type);
+
     foreach (Object *obj, mObjects) {
         ObjectProperty prop;
         prop.existed = obj->hasProperty(mName);
@@ -96,7 +99,7 @@ void SetProperty::undo()
 void SetProperty::redo()
 {
     foreach (Object *obj, mObjects)
-        mMapDocument->setProperty(obj, mName, mValue, mType);
+        mMapDocument->setProperty(obj, mName, mValue.toString(), mValue.type());
 }
 
 

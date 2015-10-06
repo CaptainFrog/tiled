@@ -88,8 +88,8 @@ private:
     MapDocument *mMapDocument;
     QList<Object*> mObjects;
     QString mName;
-    QString mValue;
-    QVariant::Type mType;       // The type of the property
+    QVariant mValue;
+
 };
 
 class RemoveProperty : public QUndoCommand
