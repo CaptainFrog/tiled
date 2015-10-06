@@ -214,7 +214,15 @@ void PropertiesDock::addProperty(const QString &name, QVariant::Type type)
 
         // FROG TODO Find default value according to type (allow for complex types QSize, QDictionnary)
         QVariant value;
-        value.setValue(QString());
+
+        if(type == QVariant::Size || type == QVariant::SizeF){
+            value.setValue(QSize(0,0));
+        }else if(type == QVariant::Point || type == QVariant::PointF){
+            value.setValue(QPoint(0,0));
+        }else{
+            value.setValue(QString());
+        }
+
         value.convert(type);
 
         undoStack->push(new SetProperty(mMapDocument, mMapDocument->currentObjects(), name, value));

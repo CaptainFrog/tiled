@@ -73,7 +73,7 @@ public:
     SetProperty(MapDocument *mapDocument,
                  const QList<Object*> &objects,
                  const QString &name,
-                 QVariant var,
+                 const QVariant &var,
                  QUndoCommand *parent = nullptr);
 
     void undo() override;

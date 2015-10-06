@@ -118,7 +118,7 @@ public:
     /**
      * Sets the value of the object's \a name property to \a value.
      */
-    void setProperty(const QString &name, QVariant variant)
+    void setProperty(const QString &name, const QVariant variant)
     {
         qDebug() << variant.toString();                   // FROG REMOVE
         qDebug() << QLatin1String(variant.typeName());    // FROG REMOVE

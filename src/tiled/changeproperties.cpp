@@ -60,7 +60,7 @@ void ChangeProperties::swapProperties()
 SetProperty::SetProperty(MapDocument *mapDocument,
                          const QList<Object*> &objects,
                          const QString &name,
-                         QVariant var,
+                         const QVariant &var,
                          QUndoCommand *parent)
     : QUndoCommand(parent)
     , mMapDocument(mapDocument)
