@@ -97,7 +97,7 @@ void SetProperty::undo()
 void SetProperty::redo()
 {
     foreach (Object *obj, mObjects)
-        mMapDocument->setProperty(obj, mName, mValue.toString(), mValue.type());
+        mMapDocument->setProperty(obj, mName, mValue);
 }
 
 
