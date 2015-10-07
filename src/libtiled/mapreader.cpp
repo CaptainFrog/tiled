@@ -965,7 +965,51 @@ void MapReaderPrivate::readProperty(Properties *properties)
         }
     }
 
+
+    if(propertyType == QLatin1String("QSize")){
+        int x = atts.value(QLatin1String("x")).toInt();
+        int y = atts.value(QLatin1String("y")).toInt();
+        QVariant variant(QPoint(x,y));
+        variant.convert(QVariant::Point);
+        properties->insert(propertyName, variant);
+        return;
+    }
+
+    if(propertyType == QLatin1String("QSizeF")){
+        float x = atts.value(QLatin1String("x")).toFloat();
+        float y = atts.value(QLatin1String("y")).toFloat();
+        QVariant variant(QPoint(x,y));
+        variant.convert(QVariant::Point);
+        properties->insert(propertyName, variant);
+        return;
+    }
+
+    if(propertyType == QLatin1String("QPoint")){
+       int width = atts.value(QLatin1String("width")).toInt();
+       int height = atts.value(QLatin1String("height")).toInt();
+       QVariant variant(QPoint(width,height));
+       variant.convert(QVariant::Point);
+       properties->insert(propertyName, variant);
+       return;
+    }
+
+
+   if(propertyType == QLatin1String("QPointF")){
+       float width = atts.value(QLatin1String("width")).toFloat();
+       float height = atts.value(QLatin1String("height")).toFloat();
+       QVariant variant(QPoint(width,height));
+       variant.convert(QVariant::Point);
+       properties->insert(propertyName, variant);
+       return;
+   }
+
+
+
+
     if(propertyType.isEmpty() || propertyType.isNull()){
+        propertyType = QLatin1String(QVariant::typeToName(QVariant::String)); // Default to String
+    }
+    if(propertyType == QLatin1String("float")){
         propertyType = QLatin1String(QVariant::typeToName(QVariant::String)); // Default to String
     }
     QVariant variant(propertyValue);

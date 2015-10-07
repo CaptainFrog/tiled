@@ -622,6 +622,24 @@ void MapWriterPrivate::writeProperties(QXmlStreamWriter &w,
         } else {
             w.writeAttribute(QLatin1String("value"), it.value().toString());
             w.writeAttribute(QLatin1String("type"), QLatin1String(it.value().typeName()));
+
+
+            if(QLatin1String(it.value().typeName()) == QLatin1String("QSize") ||
+               QLatin1String(it.value().typeName()) == QLatin1String("QSizeF"))
+            {
+                QSize s = it.value().toSize();
+                w.writeAttribute(QLatin1String("width"), QString::number(s.width()));
+                w.writeAttribute(QLatin1String("height"), QString::number(s.height()));
+
+            }
+
+            if(QLatin1String(it.value().typeName()) == QLatin1String("QPoint") ||
+               QLatin1String(it.value().typeName()) == QLatin1String("QPointF"))
+            {
+                QPoint p = it.value().toPoint();
+                w.writeAttribute(QLatin1String("x"), QString::number(p.x()));
+                w.writeAttribute(QLatin1String("y"), QString::number(p.y()));
+            }
         }
         w.writeEndElement();
     }
