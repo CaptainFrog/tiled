@@ -966,39 +966,43 @@ void MapReaderPrivate::readProperty(Properties *properties)
     }
 
 
-    if(propertyType == QLatin1String("QSize")){
+    if(propertyType == QLatin1String("QPoint")){
         int x = atts.value(QLatin1String("x")).toInt();
         int y = atts.value(QLatin1String("y")).toInt();
+
         QVariant variant(QPoint(x,y));
         variant.convert(QVariant::Point);
+        properties->insert(propertyName, variant);
+        return;
+    }
+
+    if(propertyType == QLatin1String("QPointF")){
+        float x = atts.value(QLatin1String("x")).toFloat();
+        float y = atts.value(QLatin1String("y")).toFloat();
+
+        QVariant variant(QPointF(x,y));
+        variant.convert(QVariant::PointF);
         properties->insert(propertyName, variant);
         return;
     }
 
     if(propertyType == QLatin1String("QSizeF")){
-        float x = atts.value(QLatin1String("x")).toFloat();
-        float y = atts.value(QLatin1String("y")).toFloat();
-        QVariant variant(QPoint(x,y));
-        variant.convert(QVariant::Point);
-        properties->insert(propertyName, variant);
-        return;
-    }
-
-    if(propertyType == QLatin1String("QPoint")){
        int width = atts.value(QLatin1String("width")).toInt();
        int height = atts.value(QLatin1String("height")).toInt();
-       QVariant variant(QPoint(width,height));
-       variant.convert(QVariant::Point);
+
+       QVariant variant(QSize(width,height));
+       variant.convert(QVariant::Size);
        properties->insert(propertyName, variant);
        return;
     }
 
 
-   if(propertyType == QLatin1String("QPointF")){
+   if(propertyType == QLatin1String("QSizeF")){
        float width = atts.value(QLatin1String("width")).toFloat();
        float height = atts.value(QLatin1String("height")).toFloat();
-       QVariant variant(QPoint(width,height));
-       variant.convert(QVariant::Point);
+
+       QVariant variant(QSizeF(width,height));
+       variant.convert(QVariant::SizeF);
        properties->insert(propertyName, variant);
        return;
    }
