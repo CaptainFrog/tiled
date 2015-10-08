@@ -31,8 +31,6 @@
 
 #include "properties.h"
 
-#include <QDebug> // FROG REMOVE
-
 namespace Tiled {
 
 /**
@@ -105,7 +103,7 @@ public:
 
     /**
      * Sets the value of the object's \a name property to \a value.
-     * This override (<< FROG BETTER WORD HERE )is used for compatibility with plugins
+     * This override is used for compatibility with plugins
      */
     void setProperty(const QString &name, const QString &value, QVariant::Type type = QVariant::String)
     {
@@ -120,8 +118,6 @@ public:
      */
     void setProperty(const QString &name, const QVariant variant)
     {
-        qDebug() << variant.toString();                   // FROG REMOVE
-        qDebug() << QLatin1String(variant.typeName());    // FROG REMOVE
         mProperties.insert(name, variant);
     }
 

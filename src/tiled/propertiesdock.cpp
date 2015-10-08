@@ -212,7 +212,7 @@ void PropertiesDock::addProperty(const QString &name, QVariant::Type type)
     if (!object->hasProperty(name)) {
         QUndoStack *undoStack = mMapDocument->undoStack();
 
-        // FROG TODO Find default value according to type (allow for complex types QSize, QDictionnary)
+        // Find default value according to type (allow for complex types QSize, QDictionnary)
         QVariant value;
 
         if(type == QVariant::Size || type == QVariant::SizeF){
@@ -222,9 +222,7 @@ void PropertiesDock::addProperty(const QString &name, QVariant::Type type)
         }else{
             value.setValue(QString());
         }
-
         value.convert(type);
-
         undoStack->push(new SetProperty(mMapDocument, mMapDocument->currentObjects(), name, value));
     }
     mPropertyBrowser->editCustomProperty(name);
