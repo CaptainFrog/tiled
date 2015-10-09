@@ -87,12 +87,21 @@ public:
 
     /**
      * Returns the value of the object's \a name property.
+     * as a String
      */
     QString property(const QString &name) const
     { return mProperties.value(name).toString(); }
 
     QVariant::Type propertyType(const QString &name) const {
         return mProperties.value(name).type();
+    }
+    /**
+     * @brief Returns a QVariant with the value of the property
+     * @param name the name of the property
+     * @return the Qvariant value of the property
+     */
+    QVariant propertyValue(const QString &name) const {
+        return mProperties.value(name);
     }
 
     /**

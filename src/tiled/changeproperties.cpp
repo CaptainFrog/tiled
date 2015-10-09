@@ -148,14 +148,12 @@ RenameProperty::RenameProperty(MapDocument *mapDocument,
         QList<Object*> objects;
         objects.append(object);
 
-        const QString value = object->property(oldName);
+        QVariant value = object->propertyValue(oldName);
         QVariant::Type type = object->propertyType(oldName);
 
         // TODO GET REAL QVARIANT VALUE
-        QVariant v;
-        v.setValue(value);
-        v.convert(type);
+        //value.convert(type);
 
-        new SetProperty(mapDocument, objects, newName, v, this);
+        new SetProperty(mapDocument, objects, newName, value, this);
     }
 }
